@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 cp /vagrant/sw/hosts /etc/hosts
 echo 'db.test' > /etc/hostname
