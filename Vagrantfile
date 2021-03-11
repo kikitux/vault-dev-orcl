@@ -28,6 +28,7 @@ Vagrant.configure("2") do |config|
     end
 
     vault.vm.provision "shell", path: "scripts/provision_vault.sh"
+    vault.vm.provision "shell", path: "scripts/provision_instantclient.sh"
 
   end
 

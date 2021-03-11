@@ -1,0 +1,30 @@
+[Unit]
+Description=Vault
+Documentation=https://www.vaultproject.io/docs/
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=10
+
+# If you are running Consul, please uncomment following Wants/After configs.
+# Assuming your Consul service unit name is "consul"
+#Wants=consul.service
+#After=consul.service
+
+[Service]
+KillMode=process
+KillSignal=SIGINT
+Environment=VAULT_DEV_ROOT_TOKEN_ID=changeme
+Environment=LD_LIBRARY_PATH=/usr/lib/oracle/19.9/client64/lib
+ExecStart=/usr/local/bin/vault server -config=/etc/vault.d/ -dev -dev-listen-address=0.0.0.0:8200 -log-level=info
+ExecStartPost=/bin/sleep 10
+ExecStartPost=/usr/local/bin/vault secrets enable -address=http://127.0.0.1:8200 -version=1 kv
+ExecStartPost=/usr/local/bin/vault secrets enable -address=http://127.0.0.1:8200 transit
+ExecStartPost=/usr/local/bin/vault secrets enable -address=http://127.0.0.1:8200 database
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=2
+StartLimitBurst=3
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
