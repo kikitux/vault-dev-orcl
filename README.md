@@ -12,6 +12,26 @@ Place the binary for 18c xe db in sw directory
 sw/oracle-database-xe-18c-1.0-1.x86_64.rpm
 ```
 
+# how to use this repo
+
+- clone this repo
+```
+git clone https://github.com/kikitux/vault-dev-orcl
+```
+
+- change directory
+```
+cd vault-dev-orcl
+```
+
+- place the [oracle db xe](https://www.oracle.com/database/technologies/xe-downloads.html) binary in the `sw/` directory
+
+- create the vms
+```
+vagrant up
+```
+
+
 # on Vault node
 
 ## connect to vault node
