@@ -1,6 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# version for Vault and Plugin
+# will download latest if empty
+VAULT=""
+PLUGIN=""
+
 Vagrant.configure("2") do |config|
 
   config.vm.box_url = "https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json"
@@ -28,7 +33,11 @@ Vagrant.configure("2") do |config|
     end
 
     vault.vm.provision "shell", path: "scripts/provision_instantclient.sh"
-    vault.vm.provision "shell", path: "scripts/provision_vault.sh"
+
+    VAULT||=""
+    PLUGIN||=""
+    vault.vm.provision "shell", path: "scripts/provision_vault.sh",
+      env: { "VAULT" => VAULT, "PLUGIN" => PLUGIN }
 
   end
 
