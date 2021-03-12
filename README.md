@@ -7,6 +7,19 @@ vault repo for oracle db and plugin
 - vagrant
 - [oracle db xe](https://www.oracle.com/database/technologies/xe-downloads.html)
 
+Place the binary for 18c xe db in sw directory
+```
+sw/oracle-database-xe-18c-1.0-1.x86_64.rpm
+```
+
+# on Vault node
+
+## connect to vault node
+
+```
+vagrant ssh vault
+```
+
 ## connect to database
 
 ```
@@ -40,7 +53,7 @@ HA Enabled      false
 ```
 
 
-## generate 
+## generate credential
 
 ```
 VAULT_ADDR=http://127.0.0.1:8200 vault read database/creds/my-role
