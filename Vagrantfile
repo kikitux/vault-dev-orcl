@@ -33,11 +33,8 @@ Vagrant.configure("2") do |config|
     end
 
     vault.vm.provision "shell", path: "scripts/provision_instantclient.sh"
-
-    VAULT||=""
-    PLUGIN||=""
     vault.vm.provision "shell", path: "scripts/provision_vault.sh",
-      env: { "VAULT" => VAULT, "PLUGIN" => PLUGIN }
+      env: { "VAULT" => VAULT||=String.new, "PLUGIN" => PLUGIN||=String.new }
 
   end
 
