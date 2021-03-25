@@ -56,6 +56,14 @@ vault write sys/plugins/catalog/database/oracle-database-plugin \
   sha256="${SHA256}" \
   command=vault-plugin-database-oracle
 
+# create user
+PASSWORD=${PASSWORD:-tiger}
+. /vagrant/sw/instantclient.env
+sqlplus system/password@//db.test:1521/XEPDB1 <<EOF
+@/vagrant/sw/create_user.sql
+alter user scott identified by "${PASSWORD}";
+EOF
+
 vault write database/config/my-oracle-database \
   plugin_name=oracle-database-plugin \
   connection_url="system/password@db.test:1521/XEPDB1" \

@@ -31,6 +31,42 @@ cd vault-dev-orcl
 vagrant up
 ```
 
+# information about database
+
+The following users will be created:
+
+- scott
+- static
+
+Password for user scott is defined in the `Vagrantfile` and defaults to `tiger`
+
+# on db node
+
+## connect to database
+
+if there is the need to connect to the database, to perform operations like create users, you can connect like this
+
+```
+vault ssh db
+sudo su - oracle
+. oraenv
+XE
+sqlplus / as sysdba
+```
+
+## restore database
+
+if there is the need to restore database to a good point, you can do
+
+```
+vault ssh db
+sudo su - oracle
+. oraenv
+XE
+sqlplus / as sysdba
+@/vagrant/sw/flashback.sql 
+exit;
+```
 
 # on Vault node
 
@@ -44,7 +80,6 @@ vagrant ssh vault
 
 ```
 source /vagrant/sw/instantclient.env 
-sqlplus system/password@//db.test:1521/XE
 sqlplus system/password@//db.test:1521/XEPDB1
 ```
 
