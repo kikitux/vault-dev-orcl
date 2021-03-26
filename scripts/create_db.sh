@@ -3,8 +3,6 @@
 (echo "password"; echo "password";) | /etc/init.d/oracle-xe-18c configure
 usermod -a -G vagrant oracle
 
-/etc/rc.d/init.d/oracle-xe-18c start
-
 export ORACLE_SID=XE
 export ORAENV_ASK=NO
 export PATH=/usr/local/bin:$PATH
