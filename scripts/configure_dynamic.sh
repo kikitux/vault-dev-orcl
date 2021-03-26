@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PASSWORD='$tiger#'
+PASSWORD="tiger"
 
 export PATH=/usr/local/bin:${PATH}
 export VAULT_ADDR=http://localhost:8200
@@ -9,6 +9,7 @@ export VAULT_ADDR=http://localhost:8200
 sqlplus system/password@//db.test:1521/XEPDB1 <<EOF
 @/vagrant/scripts/create_user.sql
 alter user dynamic identified by "${PASSWORD}";
+exit;
 EOF
 
 vault write database/config/my-oracle-database \
