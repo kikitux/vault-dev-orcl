@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     db.vm.provision "flashback", type: "shell", path: "scripts/flashback.sh", run: "never"
     db.vm.provision "shell", path: "scripts/provision_db.sh"
-    db.vm.provision "shell", path: "scripts/create_db.sh"
+    db.vm.provision "shell", path: "scripts/create_db.sh", run: "always"
 
   end
 
