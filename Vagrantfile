@@ -6,9 +6,6 @@
 VAULT=""
 PLUGIN=""
 
-# password for user scott
-PASSWORD="tiger"
-
 Vagrant.configure("2") do |config|
 
   config.vm.box_url = "https://oracle.github.io/vagrant-projects/boxes/oraclelinux/7.json"
@@ -22,6 +19,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
     end
 
+    db.vm.provision "flashback", type: "shell", path: "scripts/flashback.sh", run: "never"
     db.vm.provision "shell", path: "scripts/provision_db.sh"
     db.vm.provision "shell", path: "scripts/create_db.sh"
 
@@ -37,11 +35,8 @@ Vagrant.configure("2") do |config|
 
     vault.vm.provision "shell", path: "scripts/provision_instantclient.sh"
     vault.vm.provision "shell", path: "scripts/provision_vault.sh",
-      env: { 
-        "VAULT" => VAULT||=String.new, 
-        "PLUGIN" => PLUGIN||=String.new,
-        "PASSWORD" => PASSWORD||="tiger"
-      }
+      env: { "VAULT" => VAULT||=String.new, "PLUGIN" => PLUGIN||=String.new }
+    vault.vm.provision "shell", path: "scripts/configure_dynamic.sh"
 
   end
 

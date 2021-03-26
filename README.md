@@ -51,6 +51,7 @@ vault ssh db
 sudo su - oracle
 . oraenv
 XE
+export ORACLE_PDB_SID=XEPDB1
 sqlplus / as sysdba
 ```
 
@@ -59,13 +60,7 @@ sqlplus / as sysdba
 if there is the need to restore database to a good point, you can do
 
 ```
-vault ssh db
-sudo su - oracle
-. oraenv
-XE
-sqlplus / as sysdba
-@/vagrant/sw/flashback.sql 
-exit;
+vagrant provision --provision-with flashback
 ```
 
 # on Vault node
@@ -79,7 +74,7 @@ vagrant ssh vault
 ## connect to database
 
 ```
-source /vagrant/sw/instantclient.env 
+source /vagrant/scripts/instantclient.env 
 sqlplus system/password@//db.test:1521/XEPDB1
 ```
 
