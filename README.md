@@ -107,3 +107,18 @@ HA Enabled      false
 ```
 VAULT_ADDR=http://127.0.0.1:8200 vault read database/creds/my-role
 ```
+
+# vault ui
+
+## private network
+
+- url 
+```
+http://192.168.56.51:8100/ui
+```
+
+- root token
+```
+changeme
+```
+
