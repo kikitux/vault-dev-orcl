@@ -35,10 +35,9 @@ vagrant up
 
 The following users will be created:
 
-- scott
+- dynamic
 - static
-
-Password for user scott is defined in the `Vagrantfile` and defaults to `tiger`
+- myuser
 
 # on db node
 
