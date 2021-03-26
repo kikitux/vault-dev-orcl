@@ -21,14 +21,13 @@ Vagrant.configure("2") do |config|
 
     db.vm.provision "flashback", type: "shell", path: "scripts/flashback.sh", run: "never"
     db.vm.provision "shell", path: "scripts/provision_db.sh"
-    db.vm.provision "shell", path: "scripts/create_db.sh", run: "always"
+    db.vm.provision "shell", path: "scripts/create_db.sh"
 
   end
 
   config.vm.define "vault" do |vault|
     vault.vm.hostname = "vault"
     vault.vm.network "private_network", ip: "192.168.56.51"
-    vault.vm.network "forwarded_port", guest: 8200, host: 8200, auto_correct: true
     vault.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 2
