@@ -35,3 +35,5 @@ begin
     execute immediate 'grant all privileges to myuser';
   end if;
 end;
+/
+
