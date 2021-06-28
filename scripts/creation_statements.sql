@@ -1,0 +1,9 @@
+CREATE USER {{username}} IDENTIFIED BY "{{password}}";
+GRANT CONNECT TO {{name}};
+GRANT DBA TO {{name}};
+GRANT RESOURCE TO {{name}};
+CREATE OR REPLACE TRIGGER vault_schema_logon
+AFTER logon ON DATABASE WHEN (USER like '%V_ROOT%')
+BEGIN
+execute immediate "ALTER SESSION SET CURRENT_SCHEMA = AMIPUR"
+END;

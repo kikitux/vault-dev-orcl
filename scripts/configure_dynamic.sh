@@ -19,7 +19,7 @@ vault read database/config/my-oracle-database
 
 vault write database/roles/my-role \
   db_name=my-oracle-database \
-  creation_statements='CREATE USER {{username}} IDENTIFIED BY "{{password}}"; GRANT CONNECT TO {{username}}; GRANT CREATE SESSION TO {{username}};' \
+  creation_statements=@/vagrant/scripts/creation_statements.sql \
   default_ttl="1h" \
   max_ttl="24h"
 
