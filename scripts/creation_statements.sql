@@ -3,8 +3,3 @@ GRANT CONNECT TO {{name}};
 GRANT CREATE SESSION to {{name}};
 GRANT DBA TO {{name}};
 GRANT RESOURCE TO {{name}};
-CREATE OR REPLACE TRIGGER vault_schema_logon
-AFTER logon ON DATABASE WHEN (USER like '%V_ROOT%')
-BEGIN
-execute immediate "ALTER SESSION SET CURRENT_SCHEMA = AMIPUR"
-END;
